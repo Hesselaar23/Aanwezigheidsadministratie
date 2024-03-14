@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "medewerkers",
+  "info": {
+    "singularName": "medewerker",
+    "pluralName": "medewerkers",
+    "displayName": "Medewerker",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "voornaam": {
+      "type": "string",
+      "required": true
+    },
+    "tussenvoegsels": {
+      "type": "string"
+    },
+    "achternaam": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "unique": true,
+      "required": true
+    },
+    "bezoekers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bezoeker.bezoeker",
+      "mappedBy": "medewerker"
+    },
+    "aanwezigheid": {
+      "type": "enumeration",
+      "enum": [
+        "afwezig",
+        "aanwezig",
+        "thuis"
+      ],
+      "default": "afwezig"
+    }
+  }
+}
