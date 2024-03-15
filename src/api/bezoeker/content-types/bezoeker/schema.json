@@ -4,7 +4,8 @@
   "info": {
     "singularName": "bezoeker",
     "pluralName": "bezoekers",
-    "displayName": "Bezoeker"
+    "displayName": "Bezoeker",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -26,7 +27,8 @@
       "type": "string"
     },
     "achternaam": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "bedrijf": {
       "type": "string"
