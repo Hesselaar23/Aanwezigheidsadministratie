@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -17,7 +17,8 @@
       "enum": [
         "aangemeld",
         "afgemeld"
-      ]
+      ],
+      "default": "aangemeld"
     },
     "voornaam": {
       "type": "string",
