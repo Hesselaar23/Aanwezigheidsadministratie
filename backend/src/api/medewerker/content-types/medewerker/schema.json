@@ -40,9 +40,17 @@
       "enum": [
         "afwezig",
         "aanwezig",
-        "thuis"
+        "extern"
       ],
       "default": "afwezig"
+    },
+    "bhv_status": {
+      "type": "enumeration",
+      "enum": [
+        "null",
+        "safe",
+        "flagged"
+      ]
     }
   }
 }

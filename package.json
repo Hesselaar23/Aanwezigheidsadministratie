@@ -1,0 +1,6 @@
+{
+	"dependencies": {
+		"react-textfit": "^1.1.1",
+		"textfit": "^2.4.0"
+	}
+}
