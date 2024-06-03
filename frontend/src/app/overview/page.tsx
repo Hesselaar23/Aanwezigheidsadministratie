@@ -72,8 +72,8 @@ export default function Overview() {
     <div className="font-bold h-screen flex flex-col items-center">
       <div className="w-full flex justify-between items-center px-4 py-2">
         <div className="flex items-center">
-          <img src={`http://${ipAddress}:1337/api/uploads/kega_logo.png`} className="h-20 w-auto" />
-          <img src={`http://${ipAddress}:1337/api/uploads/keephub_logo.png`} className="h-20 w-auto" />
+          <img src={`http://${ipAddress}:1337/api/uploads/2`} className="h-20 w-auto" />
+          <img src={`http://${ipAddress}:1337/api/uploads/1`} className="h-20 w-auto" />
         </div>
         <div className="flex items-center">
           <h1 className="text-6xl">Aanwezigheid</h1>
