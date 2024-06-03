@@ -4,11 +4,23 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import useMedewerkers from "../api/useMedewerkers";
 import { Medewerker } from "@/lib/types";
 import config from '@/lib/ip_config.json';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+
 
 export default function Overview() {
-  const { medewerkers, loading, updateMedewerker } = useMedewerkers();
+  const { medewerkers, loading, error, updateMedewerker } = useMedewerkers();
   const ipAddress = config.ipAddress;
-
   const [cardColors, setCardColors] = useState<{ [key: string]: string }>({});
 
   const handleClick = async (medewerker: Medewerker) => {
@@ -22,8 +34,8 @@ export default function Overview() {
     const updatedMedewerker = {
       ...medewerker,
       attributes: {
-        ...medewerker.attributes,
-        aanwezigheid: newStatus,
+          ...medewerker.attributes,
+         aanwezigheid: newStatus,
         id : medewerker.id
       },
     }; 
@@ -52,6 +64,10 @@ export default function Overview() {
     return <div>Loading...</div>;
   }
 
+  if (error)  {
+    return <div>{error}</div>;
+  }
+
   return (
     <div className="font-bold h-screen flex flex-col items-center">
       <div className="w-full flex justify-between items-center px-4 py-2">
@@ -76,7 +92,7 @@ export default function Overview() {
             const textColor = medewerker.attributes.aanwezigheid === 'afwezig' ? '#000000' : '#ffffff'; // Adjust text color based on aanwezigheid
 
           return (
-            <Card key={medewerker.id} className="flex-auto m-2" style={{ backgroundColor: color }} onClick={() => handleClick(medewerker)}>
+            <Card key={medewerker.id} className="flex-auto m-2 select-none" style={{ backgroundColor: color }} onClick={() => handleClick(medewerker)}>
               <CardHeader className="flex items-center justify-center h-full">
                 <CardTitle style={{ color: textColor, fontSize: '1vw', whiteSpace: 'nowrap' }}>
                   {`${medewerker.attributes.voornaam} ${medewerker.attributes.tussenvoegsels || ''} ${medewerker.attributes.achternaam}`}
@@ -86,6 +102,19 @@ export default function Overview() {
           );
         })}
       </div>
+      {/* <AlertDialog>
+        <AlertDialogTrigger>Open</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Want to enter fullscreen?</AlertDialogTitle>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>NO</AlertDialogCancel>
+            <AlertDialogAction>Yes</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog> */}
+
     </div>
   );
 }

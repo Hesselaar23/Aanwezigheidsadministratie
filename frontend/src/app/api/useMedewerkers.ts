@@ -5,25 +5,23 @@ import config from '@/lib/ip_config.json';
 
 export default function useMedewerkers() {
   const [medewerkers, setMedewerkers] = useState<Medewerker[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const ipAddress = config.ipAddress;
 
   useEffect(() => {
     async function fetchMedewerkers() {
-      try {
+      // try {
+        setLoading(true);
         const response = await fetch(`http://${ipAddress}:1337/api/medewerkers/?pagination[page]=1&pagination[pageSize]=100`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
         const data = await response.json();
         setMedewerkers(data.data);
         setLoading(false);
-      } catch (error) {
-        console.error('Error fetching medewerkers:', error);
-        setError('Failed to fetch data. Please try again.');
-        setLoading(false);
-      }
+      // } catch (error) {
+        // console.error('Error fetching medewerkers:', error);
+        // setError('Failed to fetch data. Please try again.');
+        // setLoading(false);
+      // }
     }
 
     fetchMedewerkers();
