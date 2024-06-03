@@ -9,7 +9,6 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -22,6 +21,7 @@ export default function Overview() {
   const { medewerkers, loading, error, updateMedewerker } = useMedewerkers();
   const ipAddress = config.ipAddress;
   const [cardColors, setCardColors] = useState<{ [key: string]: string }>({});
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = async (medewerker: Medewerker) => {
     let newStatus: 'aanwezig' | 'afwezig' | 'extern';
@@ -76,7 +76,7 @@ export default function Overview() {
           <img src={`http://${ipAddress}:1337/api/uploads/1`} className="h-20 w-auto" />
         </div>
         <div className="flex items-center">
-          <h1 className="text-6xl">Aanwezigheid</h1>
+          <h1 className="text-6xl" onClick={() => setIsOpen(true)}>Aanwezigheid</h1>
         </div>
         <div className="flex items-center"> 
           <h1 className="mr-4 text-2xl">Aantal <br/> aanwezigen</h1>
@@ -103,18 +103,22 @@ export default function Overview() {
           );
         })}
       </div>
-      {/* <AlertDialog>
-        <AlertDialogTrigger>Open</AlertDialogTrigger>
+      <AlertDialog open={isOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Want to enter fullscreen?</AlertDialogTitle>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>NO</AlertDialogCancel>
-            <AlertDialogAction>Yes</AlertDialogAction>
+            <AlertDialogCancel onClick={() => {setIsOpen(false)}}>NO</AlertDialogCancel>
+            <AlertDialogAction onClick={() => {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } 
+        setIsOpen(false);
+      }}>Yes</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
-      </AlertDialog> */}
+      </AlertDialog>
 
     </div>
   );
