@@ -109,13 +109,18 @@ export default function Overview() {
             <AlertDialogTitle>Want to enter fullscreen?</AlertDialogTitle>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => {setIsOpen(false)}}>NO</AlertDialogCancel>
+            <AlertDialogCancel onClick={() => {
+              if (document.exitFullscreen) {
+                document.exitFullscreen();
+              }
+              setIsOpen(false)
+              }}>NO</AlertDialogCancel>
             <AlertDialogAction onClick={() => {
         if (document.documentElement.requestFullscreen) {
           document.documentElement.requestFullscreen();
         } 
         setIsOpen(false);
-      }}>Yes</AlertDialogAction>
+      }}>Yes</AlertDialogAction>  
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
