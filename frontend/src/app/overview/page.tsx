@@ -72,8 +72,8 @@ export default function Overview() {
     <div className="font-bold h-screen flex flex-col items-center">
       <div className="w-full flex justify-between items-center px-4 py-2">
         <div className="flex items-center">
-          <img src={`http://${ipAddress}:1337/uploads/kega_logo_d6bd07ca33.png`} className="h-20 w-auto" />
-          <img src={`http://${ipAddress}:1337/uploads/keephub_logo_60a59f7201.png`} className="h-20 w-auto" />
+          <img src={`http://${ipAddress}:1337/api/uploads/kega_logo.png`} className="h-20 w-auto" />
+          <img src={`http://${ipAddress}:1337/api/uploads/keephub_logo.png`} className="h-20 w-auto" />
         </div>
         <div className="flex items-center">
           <h1 className="text-6xl">Aanwezigheid</h1>
@@ -87,6 +87,7 @@ export default function Overview() {
       </div>
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-1 h-full">
         {medewerkers
+          .sort((a, b) => a.attributes.voornaam.localeCompare(b.attributes.voornaam))
           .map((medewerker) => {
             const color = cardColors[medewerker.id] || '#ffffff'; // Get color from state or default to white
             const textColor = medewerker.attributes.aanwezigheid === 'afwezig' ? '#000000' : '#ffffff'; // Adjust text color based on aanwezigheid
