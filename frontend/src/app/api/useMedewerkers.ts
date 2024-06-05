@@ -11,17 +11,17 @@ export default function useMedewerkers() {
 
   useEffect(() => {
     async function fetchMedewerkers() {
-      // try {
+      try {
         setLoading(true);
         const response = await fetch(`http://${ipAddress}:1337/api/medewerkers/?pagination[page]=1&pagination[pageSize]=100`);
         const data = await response.json();
         setMedewerkers(data.data);
         setLoading(false);
-      // } catch (error) {
-        // console.error('Error fetching medewerkers:', error);
-        // setError('Failed to fetch data. Please try again.');
-        // setLoading(false);
-      // }
+      } catch (error) {
+        console.error('Error fetching medewerkers:', error);
+        setError('Failed to fetch data. Please try again.');
+        setLoading(false);
+      }
     }
 
     fetchMedewerkers();

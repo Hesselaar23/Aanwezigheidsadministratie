@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  react-responsive-masonry:
+    specifier: ^2.2.0
+    version: 2.2.0
   react-textfit:
     specifier: ^1.1.1
     version: 1.1.1(react-dom@16.14.0)(react@16.14.0)
@@ -57,6 +60,10 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+    dev: false
+
+  /react-responsive-masonry@2.2.0:
+    resolution: {integrity: sha512-IYbnfe2tWCZ3pvyTLyBWPj7uv5ZmNOULYMcAZi5a47ZLhSotOck1vkkISq6gP2qiyWdMvPfeMhjvYzUYGw9BOQ==}
     dev: false
 
   /react-textfit@1.1.1(react-dom@16.14.0)(react@16.14.0):

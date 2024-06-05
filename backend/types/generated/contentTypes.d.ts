@@ -362,6 +362,92 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiBezoekerBezoeker extends Schema.CollectionType {
+  collectionName: 'bezoekers';
+  info: {
+    singularName: 'bezoeker';
+    pluralName: 'bezoekers';
+    displayName: 'Bezoeker';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    status: Attribute.Enumeration<['aangemeld', 'afgemeld']> &
+      Attribute.DefaultTo<'aangemeld'>;
+    voornaam: Attribute.String & Attribute.Required;
+    tussenvoegsels: Attribute.String;
+    achternaam: Attribute.String & Attribute.Required;
+    bedrijf: Attribute.String;
+    aangemeldom: Attribute.DateTime & Attribute.Required;
+    afgemeldom: Attribute.DateTime;
+    medewerker: Attribute.Relation<
+      'api::bezoeker.bezoeker',
+      'manyToOne',
+      'api::medewerker.medewerker'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::bezoeker.bezoeker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::bezoeker.bezoeker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMedewerkerMedewerker extends Schema.CollectionType {
+  collectionName: 'medewerkers';
+  info: {
+    singularName: 'medewerker';
+    pluralName: 'medewerkers';
+    displayName: 'Medewerker';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    voornaam: Attribute.String & Attribute.Required;
+    tussenvoegsels: Attribute.String;
+    achternaam: Attribute.String & Attribute.Required;
+    email: Attribute.Email &
+      Attribute.Required &
+      Attribute.Private &
+      Attribute.Unique;
+    bezoekers: Attribute.Relation<
+      'api::medewerker.medewerker',
+      'oneToMany',
+      'api::bezoeker.bezoeker'
+    >;
+    aanwezigheid: Attribute.Enumeration<['afwezig', 'aanwezig', 'extern']> &
+      Attribute.DefaultTo<'afwezig'>;
+    bhv_status: Attribute.Enumeration<['null', 'safe', 'flagged']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::medewerker.medewerker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::medewerker.medewerker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -788,92 +874,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiBezoekerBezoeker extends Schema.CollectionType {
-  collectionName: 'bezoekers';
-  info: {
-    singularName: 'bezoeker';
-    pluralName: 'bezoekers';
-    displayName: 'Bezoeker';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    status: Attribute.Enumeration<['aangemeld', 'afgemeld']> &
-      Attribute.DefaultTo<'aangemeld'>;
-    voornaam: Attribute.String & Attribute.Required;
-    tussenvoegsels: Attribute.String;
-    achternaam: Attribute.String & Attribute.Required;
-    bedrijf: Attribute.String;
-    aangemeldom: Attribute.DateTime & Attribute.Required;
-    afgemeldom: Attribute.DateTime;
-    medewerker: Attribute.Relation<
-      'api::bezoeker.bezoeker',
-      'manyToOne',
-      'api::medewerker.medewerker'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::bezoeker.bezoeker',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::bezoeker.bezoeker',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiMedewerkerMedewerker extends Schema.CollectionType {
-  collectionName: 'medewerkers';
-  info: {
-    singularName: 'medewerker';
-    pluralName: 'medewerkers';
-    displayName: 'Medewerker';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    voornaam: Attribute.String & Attribute.Required;
-    tussenvoegsels: Attribute.String;
-    achternaam: Attribute.String & Attribute.Required;
-    email: Attribute.Email &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.Unique;
-    bezoekers: Attribute.Relation<
-      'api::medewerker.medewerker',
-      'oneToMany',
-      'api::bezoeker.bezoeker'
-    >;
-    aanwezigheid: Attribute.Enumeration<['afwezig', 'aanwezig', 'extern']> &
-      Attribute.DefaultTo<'afwezig'>;
-    bhv_status: Attribute.Enumeration<['null', 'safe', 'flagged']>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::medewerker.medewerker',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::medewerker.medewerker',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -884,6 +884,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::bezoeker.bezoeker': ApiBezoekerBezoeker;
+      'api::medewerker.medewerker': ApiMedewerkerMedewerker;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -892,8 +894,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::bezoeker.bezoeker': ApiBezoekerBezoeker;
-      'api::medewerker.medewerker': ApiMedewerkerMedewerker;
     }
   }
 }
