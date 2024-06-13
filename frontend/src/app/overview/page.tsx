@@ -83,8 +83,8 @@ export default function Overview() {
   }, []); 
   const RenderMedewerker = (({medewerker} : {medewerker : Medewerker}) => {
 
-    const color = cardColors[medewerker.id] || '#ffffff'; // Get color from state or default to white
-    const textColor = medewerker.attributes.aanwezigheid === 'afwezig' ? '#000000' : '#ffffff'; // Adjust text color based on aanwezigheid
+    const color = cardColors[medewerker.id] || '#ffffff'; 
+    const textColor = medewerker.attributes.aanwezigheid === 'afwezig' ? '#000000' : '#ffffff'; 
   
   return (
     <Card key={medewerker.id} className="flex-auto m-2 select-none" style={{ backgroundColor: color }} onClick={() => handleClick(medewerker)}>

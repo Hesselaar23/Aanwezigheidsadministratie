@@ -1,13 +1,13 @@
 import requests
 
 # Strapi API endpoint
-url = "http://10.10.10.80:1337/api/medewerkers"
+url = "http://localhost:1337/api/medewerkers"
 
 headers = {
     "Content-Type": "application/json"
     }
 # List of names to update or create
-names = [
+names = ["John Doe", "Jane Doe", "Alice Doe", "Bob Doe", "Charlie Doe", "David Doe", "Eve Doe", "Frank Doe", "Grace Doe", "Heidi Doe", "Ivan Doe", "Judy Doe", "Kevin Doe", "Linda Doe", "Michael Doe", "Nancy Doe", "Oscar Doe", "Pamela Doe", "Quincy Doe", "Rachel Doe", "Steve Doe", "Tina Doe", "Ursula Doe", "Victor Doe", "Wendy Doe", "Xander Doe", "Yvonne Doe", "Zach Doe", "Abby Doe", "Ben Doe", "Cathy Doe", "Dan Doe", "Ella Doe", "Finn Doe", "Gina Doe", "Hank Doe", "Iris Doe", "Jack Doe", "Katy Doe", "Liam Doe", "Mia Doe", "Nate Doe", "Olivia Doe", "Paul Doe", "Quinn Doe", "Rose Doe", "Sam Doe", "Tara Doe", "Uma Doe", "Vince Doe", "Wendy Doe", "Xavier Doe", "Yara Doe", "Zane Doe"
 ]
 
 # Function to split names
